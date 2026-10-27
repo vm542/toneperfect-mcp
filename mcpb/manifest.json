@@ -1,0 +1,43 @@
+{
+  "manifest_version": "0.3",
+  "name": "toneperfect",
+  "display_name": "TonePerfect Pronunciation Assessment",
+  "version": "0.1.0",
+  "description": "Pronunciation assessment API, 10 languages: sentence, word and sound scores for a recording of a known text.",
+  "long_description": "Connects Claude to the TonePerfect pronunciation assessment API. Give it a short recording (up to 30 s) of someone reading a known text plus that text, and it returns 0-100 display grades for the recording, every word and every sound, with expected vs heard values and timings. Mandarin gets a separate initial, final and tone score per syllable.\n\nTen languages: Mandarin Chinese, English, French, Spanish, German, Italian, Portuguese, Russian, Korean (beta) and Japanese (beta). Scripted speech only: it scores reading of a given text, not free conversation.\n\nNeeds an API key: new accounts get 50 free credits, no card needed (https://api.toneperfect.app/signup). Plans start at $10/month. One credit per started 15 seconds of assessable audio; unassessable recordings cost nothing.",
+  "author": { "name": "TonePerfect", "email": "nik@toneperfect.app", "url": "https://api.toneperfect.app" },
+  "homepage": "https://api.toneperfect.app",
+  "documentation": "https://api.toneperfect.app/docs",
+  "support": "mailto:nik@toneperfect.app",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.cjs",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.cjs"],
+      "env": { "TONEPERFECT_API_KEY": "${user_config.api_key}" }
+    }
+  },
+  "tools": [
+    { "name": "list_languages", "description": "List supported languages, scored dimensions and limits (free, no key)." },
+    { "name": "assess_pronunciation", "description": "Score a recording (file path, base64 or URL) against its reference text." },
+    { "name": "explain_result", "description": "Explain an assessment result word by word (local, no API call)." }
+  ],
+  "keywords": ["pronunciation", "pronunciation-assessment", "speech", "mandarin", "tones", "language-learning"],
+  "license": "MIT",
+  "privacy_policies": ["https://toneperfect.app/privacy"],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=18.0.0" }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "TonePerfect API key",
+      "description": "Secret key (tp_live_...) from https://api.toneperfect.app/dashboard. New accounts get 50 free credits.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

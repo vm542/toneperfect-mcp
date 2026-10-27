@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "app.toneperfect/pronunciation",
+  "title": "TonePerfect Pronunciation Assessment",
+  "description": "Pronunciation assessment API, 10 languages: sentence, word and sound scores for read-aloud audio.",
+  "version": "0.1.0",
+  "websiteUrl": "https://api.toneperfect.app",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "toneperfect-mcp",
+      "version": "0.1.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "TONEPERFECT_API_KEY",
+          "description": "Secret API key (tp_live_...) from https://api.toneperfect.app/dashboard; 50 free credits on signup.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}

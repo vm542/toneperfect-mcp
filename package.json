@@ -1,0 +1,60 @@
+{
+  "name": "toneperfect-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for the TonePerfect pronunciation assessment API, 10 languages: sentence, word and sound scores for a recording of a known text.",
+  "mcpName": "app.toneperfect/pronunciation",
+  "license": "MIT",
+  "author": "TonePerfect <nik@toneperfect.app>",
+  "homepage": "https://api.toneperfect.app",
+  "bugs": {
+    "url": "https://github.com/vm542/toneperfect-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "pronunciation",
+    "pronunciation-assessment",
+    "speech",
+    "mandarin",
+    "tones",
+    "language-learning",
+    "claude",
+    "cursor"
+  ],
+  "type": "module",
+  "bin": {
+    "toneperfect-mcp": "dist/index.js"
+  },
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/index.js",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "bundle": "node scripts/bundle.mjs",
+    "pack:mcpb": "npm run build && npm run bundle && mcpb validate mcpb/manifest.json && mcpb pack mcpb toneperfect.mcpb",
+    "prepublishOnly": "npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "^2.1.2",
+    "@types/node": "^22.20.5",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vm542/toneperfect-mcp.git"
+  }
+}
